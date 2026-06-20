@@ -7,6 +7,9 @@
 # Nightly build:
 #   curl -fsSL https://raw.githubusercontent.com/techandpeople/SoftEdIBO/master/install.sh | bash -s -- --nightly
 #
+# Install from a personal fork (e.g. for testing):
+#   curl -fsSL https://raw.githubusercontent.com/DiogoSaraiva/SoftEdIBO/master/install.sh | bash -s -- --repo=DiogoSaraiva/SoftEdIBO --nightly
+#
 # Local AppImage:
 #   ./install.sh SoftEdIBO-x86_64.AppImage
 #
@@ -17,7 +20,7 @@
 #   ./install.sh --system
 set -euo pipefail
 
-REPO="techandpeople/SoftEdIBO"
+REPO="${SOFTEDIBO_REPO:-techandpeople/SoftEdIBO}"
 SYSTEM_INSTALL=false
 INSTALL_DIR="$HOME/.local/opt/SoftEdIBO"
 APPIMAGE_DEST="$INSTALL_DIR/SoftEdIBO.AppImage"
@@ -44,16 +47,18 @@ for arg in "$@"; do
             ;;
         --nightly) NIGHTLY=true ;;
         --system) SYSTEM_INSTALL=true ;;
+        --repo=*) REPO="${arg#--repo=}" ;;
         --help|-h)
             cat << 'EOF'
 Usage:
   ./install.sh [OPTIONS] [APPIMAGE]
 
 Options:
-  --nightly     Install the latest nightly build instead of the stable release
-    --system      Install system-wide to /opt + /usr/local/bin (requires sudo)
-  --uninstall   Remove SoftEdIBO from the system
-  -h, --help    Show this help message
+  --nightly          Install the latest nightly build instead of the stable release
+  --repo=OWNER/REPO  Download from a different GitHub repo (default: techandpeople/SoftEdIBO)
+  --system           Install system-wide to /opt + /usr/local/bin (requires sudo)
+  --uninstall        Remove SoftEdIBO from the system
+  -h, --help         Show this help message
 
 Arguments:
   APPIMAGE      Path to a local .AppImage file (skips download)
@@ -65,11 +70,14 @@ Examples:
   # Install latest nightly build:
   curl -fsSL https://raw.githubusercontent.com/techandpeople/SoftEdIBO/master/install.sh | bash -s -- --nightly
 
+  # Install nightly from a personal fork (e.g. for testing):
+  curl -fsSL https://raw.githubusercontent.com/DiogoSaraiva/SoftEdIBO/master/install.sh | bash -s -- --repo=DiogoSaraiva/SoftEdIBO --nightly
+
   # Install from a local AppImage:
   ./install.sh SoftEdIBO-x86_64.AppImage
 
-    # Install system-wide (legacy behavior):
-    ./install.sh --system
+  # Install system-wide (legacy behavior):
+  ./install.sh --system
 
   # Uninstall:
   ./install.sh --uninstall
