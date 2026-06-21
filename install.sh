@@ -20,7 +20,7 @@
 #   ./install.sh --system
 set -euo pipefail
 
-REPO="${SOFTEDIBO_REPO:-DiogoSaraiva/SoftEdIBO}"
+REPO="${SOFTEDIBO_REPO:-techandpeople/SoftEdIBO}"
 SYSTEM_INSTALL=false
 INSTALL_DIR="$HOME/.local/opt/SoftEdIBO"
 APPIMAGE_DEST="$INSTALL_DIR/SoftEdIBO.AppImage"
