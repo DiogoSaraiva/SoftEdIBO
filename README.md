@@ -77,7 +77,7 @@ See [docs/ACTIVITIES.md](docs/ACTIVITIES.md) for the broader behavior-framework 
 ### Linux (x86-64)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/techandpeople/SoftEdIBO/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/DiogoSaraiva/SoftEdIBO/master/install.sh | bash
 ```
 
 This will download the latest release, install it to `~/.local/opt/SoftEdIBO/`, create a `softedibo` command in `~/.local/bin/`, and add a desktop entry to the application menu.
@@ -85,7 +85,7 @@ This will download the latest release, install it to `~/.local/opt/SoftEdIBO/`, 
 **Nightly build** (latest commit on `master`):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/techandpeople/SoftEdIBO/master/install.sh | bash -s -- --nightly
+curl -fsSL https://raw.githubusercontent.com/DiogoSaraiva/SoftEdIBO/master/install.sh | bash -s -- --nightly
 ```
 
 **Uninstall:**
@@ -104,7 +104,7 @@ softedibo --uninstall
 
 ### Windows (x64)
 
-1. Download **`SoftEdIBO-windows-x64.zip`** from the [latest release](https://github.com/techandpeople/SoftEdIBO/releases/latest)
+1. Download **`SoftEdIBO-windows-x64.zip`** from the [latest release](https://github.com/DiogoSaraiva/SoftEdIBO/releases/latest)
 2. Extract and run **`SoftEdIBO.exe`**
 
 > **USB driver:** install the [CH340](https://www.wch-ic.com/downloads/CH341SER_EXE.html) or [CP210x](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers) driver if your device is not detected.
@@ -146,7 +146,7 @@ robots:
 ### Python application
 
 ```bash
-git clone https://github.com/techandpeople/SoftEdIBO.git
+git clone https://github.com/DiogoSaraiva/SoftEdIBO.git
 cd SoftEdIBO
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
