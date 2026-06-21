@@ -8,44 +8,6 @@ on:
     branches: [master]
 
 jobs:
-  # -----------------------------------------------------------------------
-  # Patch install.sh + README.md so all repo references match whichever
-  # GitHub repo triggered this workflow. Runs once per push to master;
-  # [skip ci] on the auto-commit prevents re-triggering.
-  # Skipped on PRs and tag pushes.
-  # -----------------------------------------------------------------------
-  sync-repo-refs:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    runs-on: ubuntu-22.04
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Patch repo references in install.sh and README.md
-        run: |
-          # Canonical source-of-truth repo (always techandpeople)
-          SOURCE="techandpeople/SoftEdIBO"
-          TARGET="$GITHUB_REPOSITORY"
-
-          # Patch install.sh REPO default line
-          sed -i "s|^REPO=.*|REPO=\"\${SOFTEDIBO_REPO:-${TARGET}}\"|" install.sh
-
-          # Patch all GitHub URLs in README.md (raw + html)
-          if [ "$TARGET" != "$SOURCE" ]; then
-            sed -i "s|${SOURCE}|${TARGET}|g" README.md
-          fi
-
-          if git diff --quiet; then
-            echo "Nothing to patch."
-          else
-            git config user.name  "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add install.sh README.md
-            git commit -m "ci: sync repo refs to ${TARGET} [skip ci]"
-            git push
-          fi
-
   build:
     runs-on: ubuntu-22.04
 
